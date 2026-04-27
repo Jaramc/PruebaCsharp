@@ -1,0 +1,118 @@
+# =========================
+# .NET / ASP.NET Core
+# =========================
+
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+*.vssscc
+*.vspscc
+*.pidb
+*.svclog
+*.pdb
+*.cache
+*.ilk
+*.meta
+*.tmp
+*.dbmdl
+*.jfm
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+.history/
+
+# =========================
+# ASP.NET Core
+# =========================
+
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+
+# No subir secretos ni credenciales
+secrets.json
+.env
+.env.*
+!.env.example
+
+# =========================
+# Entity Framework Core
+# =========================
+
+# Normalmente las migraciones SÍ se suben al repositorio.
+# Por eso NO ignoramos la carpeta Migrations.
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# =========================
+# NuGet
+# =========================
+
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.assets.json
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+LogFiles/
+
+# =========================
+# Sistema operativo
+# =========================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# =========================
+# Archivos temporales
+# =========================
+
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# =========================
+# Publicaciones
+# =========================
+
+publish/
+wwwroot/uploads/
