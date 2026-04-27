@@ -16,7 +16,6 @@ namespace PruebaCsharp.Models
         [EmailAddress(ErrorMessage = "The email format is not valid.")]
         public string EmailRecipient { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "The subject is required.")]
         [StringLength(50, ErrorMessage = "The subject cannot exceed 50 characters.")]
         public string Subject { get; set; } = string.Empty;
 

@@ -30,5 +30,7 @@ namespace PruebaCsharp.Models
         public ReservationStatus Status { get; set; } = ReservationStatus.Active;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public List<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }

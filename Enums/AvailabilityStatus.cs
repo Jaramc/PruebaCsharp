@@ -1,6 +1,7 @@
 namespace PruebaCsharp.Enums;
 
-public class AvailabilityStatus
+public enum AvailabilityStatus
 {
-    
+    Available,
+    Unavailable
 }
