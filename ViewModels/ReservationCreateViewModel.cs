@@ -5,10 +5,12 @@ namespace PruebaCsharp.ViewModels
 {
     public class ReservationCreateViewModel
     {
-        [Required(ErrorMessage = "The user is required.")]
+        [Required(ErrorMessage = "Please select a valid user.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid user.")]
         public int UserId { get; set; }
 
-        [Required(ErrorMessage = "The sports facility is required.")]
+        [Required(ErrorMessage = "Please select a valid sports facility.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid sports facility.")]
         public int SportsFacilityId { get; set; }
 
         [Required(ErrorMessage = "The reservation date is required.")]

@@ -119,16 +119,6 @@ namespace PruebaCsharp.Services
                 return "The name is required.";
             }
 
-            if (!char.IsLetter(sportsFacility.Name[0]))
-            {
-                return "The name must start with a letter.";
-            }
-
-            if (sportsFacility.Name.Any(c => !char.IsLetterOrDigit(c) && c != ' '))
-            {
-                return "The name can only contain letters, numbers and spaces.";
-            }
-
             if (sportsFacility.Capacity <= 0)
             {
                 return "The capacity must be greater than zero.";
@@ -136,5 +126,5 @@ namespace PruebaCsharp.Services
 
             return null;
         }
-        }
     }
+}
