@@ -1,0 +1,74 @@
+@model PruebaCsharp.Models.SportsFacility
+
+@{
+    ViewData["Title"] = "Create Sports Facility";
+}
+
+<link rel="stylesheet" href="~/css/users.css" asp-append-version="true" />
+
+<div class="users-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+                <div class="card form-card">
+                    <div class="form-header">
+                        <h2 class="mb-1">Create Sports Facility</h2>
+                        <p class="mb-0">Register a new sports space for reservations.</p>
+                    </div>
+
+                    <div class="form-body">
+                        <form asp-action="Create" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label"></label>
+                                <input asp-for="Name" class="form-control" placeholder="Example: Court 1" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="TypeOfSpace" class="form-label">Type Of Space</label>
+                                <select asp-for="TypeOfSpace" class="form-control" asp-items="ViewBag.TypeOfSpaces">
+                                    <option value="">Select a type</option>
+                                </select>
+                                <span asp-validation-for="TypeOfSpace"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Capacity" class="form-label"></label>
+                                <input asp-for="Capacity" class="form-control" placeholder="Example: 10" />
+                                <span asp-validation-for="Capacity"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Availability" class="form-label"></label>
+                                <select asp-for="Availability" class="form-control" asp-items="ViewBag.AvailabilityStatuses">
+                                    <option value="">Select availability</option>
+                                </select>
+                                <span asp-validation-for="Availability"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Index" class="btn btn-outline-main">
+                                    Back to List
+                                </a>
+
+                                <button type="submit" class="btn btn-main">
+                                    Create
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,105 @@
+@model IEnumerable<PruebaCsharp.Models.SportsFacility>
+@using PruebaCsharp.Enums
+
+@{
+    ViewData["Title"] = "Sports Facilities";
+}
+
+<link rel="stylesheet" href="~/css/users.css" asp-append-version="true" />
+
+<div class="users-page">
+    <div class="container">
+        <div class="card users-card">
+            <div class="users-header d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h2>Sports Facilities Management</h2>
+                    <p>Manage and filter the available sports spaces.</p>
+                </div>
+
+                <a asp-action="Create" class="btn btn-main">
+                    Create New Sports Facility
+                </a>
+            </div>
+
+            <div class="form-body">
+                <form asp-action="Index" method="get" class="row g-3 align-items-end mb-4">
+                    <div class="col-md-5">
+                        <label class="form-label">Filter by Type Of Space</label>
+                        <select name="typeOfSpace" class="form-control" asp-items="ViewBag.TypeOfSpaces">
+                            <option value="">All sports facilities</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-main">
+                            Filter
+                        </button>
+
+                        <a asp-action="Index" class="btn btn-outline-main ms-2">
+                            Clear
+                        </a>
+                    </div>
+                </form>
+
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-users table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type Of Space</th>
+                                    <th>Capacity</th>
+                                    <th>Availability</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.TypeOfSpace</td>
+                                        <td>@item.Capacity</td>
+                                        <td>
+                                            @if (item.Availability == AvailabilityStatus.Available)
+                                            {
+                                                <span class="badge rounded-pill" style="background:#3EBB9E; color:#0A3C30;">
+                                                    Available
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge rounded-pill bg-secondary">
+                                                    Unavailable
+                                                </span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-main me-2">
+                                                Details
+                                            </a>
+
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-dark-main">
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-box">
+                        <h4>No sports facilities found</h4>
+                        <p class="mb-3">Create a sports facility or change the filter.</p>
+                        <a asp-action="Create" class="btn btn-main">Create New Sports Facility</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
