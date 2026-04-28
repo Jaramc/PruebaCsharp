@@ -1,0 +1,115 @@
+@model PruebaCsharp.Models.Notification
+
+@{
+    ViewData["Title"] = "Notification Details";
+}
+
+<link rel="stylesheet" href="~/css/users.css" asp-append-version="true" />
+
+<div class="users-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card form-card">
+                    <div class="form-header">
+                        <h2 class="mb-1">Notification Details</h2>
+                        <p class="mb-0">Review the email delivery result.</p>
+                    </div>
+
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">Email Recipient</div>
+                                    <div class="details-value">@Model.EmailRecipient</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">Subject</div>
+                                    <div class="details-value">@Model.Subject</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">User</div>
+                                    <div class="details-value">@Model.Reservation.User.Name</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">Sports Facility</div>
+                                    <div class="details-value">
+                                        @Model.Reservation.SportsFacility.Name -
+                                        @Model.Reservation.SportsFacility.TypeOfSpace
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">Reservation Date</div>
+                                    <div class="details-value">
+                                        @Model.Reservation.ReservationDate.ToString("dd/MM/yyyy")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="details-item">
+                                    <div class="details-label">Date Sent</div>
+                                    <div class="details-value">
+                                        @Model.DateSent.ToString("dd/MM/yyyy hh:mm tt")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="details-item">
+                                    <div class="details-label">Status</div>
+                                    <div class="details-value">
+                                        @if (Model.WasSent)
+                                        {
+                                            <span class="badge rounded-pill" style="background:#3EBB9E; color:#0A3C30;">
+                                                Sent successfully
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-danger">
+                                                Failed
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (!Model.WasSent)
+                            {
+                                <div class="col-md-12">
+                                    <div class="details-item">
+                                        <div class="details-label">Error Message</div>
+                                        <div class="details-value">@Model.ErrorMessage</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <a asp-action="Index" class="btn btn-outline-main">
+                                Back to List
+                            </a>
+
+                            <a asp-controller="Reservations" asp-action="Create" class="btn btn-main">
+                                Create Reservation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

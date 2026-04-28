@@ -1,0 +1,124 @@
+@model IEnumerable<PruebaCsharp.Models.Reservation>
+@using PruebaCsharp.Enums
+
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<link rel="stylesheet" href="~/css/users.css" asp-append-version="true" />
+
+<div class="users-page">
+    <div class="container">
+        <div class="card users-card">
+            <div class="users-header d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h2>Reservations Management</h2>
+                    <p>Manage active, canceled and completed reservations.</p>
+                </div>
+
+                <a asp-action="Create" class="btn btn-main">
+                    Create New Reservation
+                </a>
+            </div>
+
+            <div class="form-body">
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-users table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Sports Facility</th>
+                                    <th>Date</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.User.Name</td>
+                                        <td>@item.SportsFacility.Name - @item.SportsFacility.TypeOfSpace</td>
+                                        <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.StartTime.ToString(@"hh\:mm")</td>
+                                        <td>@item.EndTime.ToString(@"hh\:mm")</td>
+                                        <td>
+                                            @if (item.Status == ReservationStatus.Active)
+                                            {
+                                                <span class="badge rounded-pill" style="background:#3EBB9E; color:#0A3C30;">
+                                                    Active
+                                                </span>
+                                            }
+                                            else if (item.Status == ReservationStatus.Canceled)
+                                            {
+                                                <span class="badge rounded-pill bg-danger">
+                                                    Canceled
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge rounded-pill bg-secondary">
+                                                    Completed
+                                                </span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-main me-1">
+                                                Details
+                                            </a>
+
+                                            @if (item.Status == ReservationStatus.Active)
+                                            {
+                                                <form asp-action="Cancel" asp-route-id="@item.Id" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="btn btn-sm btn-danger me-1">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                                <form asp-action="Complete" asp-route-id="@item.Id" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="btn btn-sm btn-dark-main">
+                                                        Complete
+                                                    </button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-box">
+                        <h4>No reservations found</h4>
+                        <p class="mb-3">Start by creating your first reservation.</p>
+                        <a asp-action="Create" class="btn btn-main">Create New Reservation</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

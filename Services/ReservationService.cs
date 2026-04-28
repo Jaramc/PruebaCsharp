@@ -10,10 +10,12 @@ namespace PruebaCsharp.Services
     public class ReservationService
     {
         private readonly ApplicationDbContext _context;
+        private readonly EmailService _emailService;
 
-        public ReservationService(ApplicationDbContext context)
+        public ReservationService(ApplicationDbContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public async Task<List<Reservation>> GetAllAsync()
@@ -142,6 +144,8 @@ namespace PruebaCsharp.Services
 
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync();
+
+            await _emailService.SendReservationConfirmationAsync(reservation.Id);
 
             return null;
         }
