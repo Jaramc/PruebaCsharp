@@ -2,7 +2,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/users.css" asp-append-version="true" />
+
+<div class="users-page">
+    <div class="container">
+        <div class="card users-card">
+            <div class="users-header text-center">
+                <h2>Sports Reservation System</h2>
+                <p>Manage users, sports facilities, reservations and notifications.</p>
+            </div>
+
+            <div class="form-body text-center">
+                <h1 class="mb-3" style="color:#0A3C30; font-weight:700;">
+                    Welcome
+                </h1>
+
+                <p class="mb-4" style="color:#00674F; font-size:1.1rem;">
+                    Start managing the users registered in your sports reservation platform.
+                </p>
+
+                <a asp-controller="Users" asp-action="Index" class="btn btn-main">
+                    Go to Users
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
